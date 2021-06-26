@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-4.0.xsd
+          http://www.springframework.org/schema/p
+         http://www.springframework.org/schema/p/spring-p-4.0.xsd
+          http://www.springframework.org/schema/mvc
+         http://www.springframework.org/schema/mvc/spring-mvc.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+         http://www.springframework.org/schema/data/jpa	
+         http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
+
+
+<tx:annotation-driven/>
+<context:component-scan base-package="com.web.project" />
+<mvc:annotation-driven />
+
+<mvc:annotation-driven enable-matrix-variables="true"></mvc:annotation-driven>
+
+<!-- Configuration defining views files -->
+ 
+<bean  id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp"/>
+</bean>
+
+
+<!-- Data Source -->
+<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
+      name="ds">
+
+<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+<property name="url" value="jdbc:mysql://localhost:33060/todo"/>
+<property name="username" value="root" />
+<property name="password" value="harpal@2797"/>
+
+</bean>
+
+<!-- LocalSessionFactoryBean -->
+
+<bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+name="factory">
+
+<property name="dataSource" ref="ds"></property>
+
+<property name="hibernateProperties">
+        <props>
+           <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dailect</prop>
+           <prop key="hibernate.hbm2ddl.auto">update</prop>
+        </props>
+</property>
+
+<property name="annotatedClasses">
+<list>
+<value>com.web.project.model.Student</value>
+</list>
+</property>
+</bean>
+
+<bean class="org.springframework.orm.hibernate5.HibernateTemplate" name="hibernateTemplate">
+<property name="sessionFactory" ref="factory"></property>
+</bean>
+
+<bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" name="hibernateManager">
+<property name="sessionFactory" ref="factory"></property>
+</bean>
+
+</beans>

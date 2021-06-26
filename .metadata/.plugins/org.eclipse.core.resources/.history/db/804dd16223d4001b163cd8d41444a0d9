@@ -1,0 +1,11 @@
+package com.controller;
+
+@Controller
+public class MyController {
+	
+	@RequestMapping("/")
+	public String() {
+		return "index";
+	}
+
+}

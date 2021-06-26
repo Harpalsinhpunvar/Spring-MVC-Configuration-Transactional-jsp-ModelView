@@ -1,0 +1,45 @@
+package com.controller;
+
+import javax.servlet.http.HttpServlet;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.view.RedirectView;
+
+import com.dao.ProductDao;
+import com.model.Product;
+
+
+@Controller
+public class ProductController {
+
+	@Autowired
+	private ProductDao productDao;
+	
+	@RequestMapping("/")
+	public String home() {
+		return "home";
+	}
+	
+	//show add
+	@RequestMapping("/addproduct")
+	public String addProduct(Model model) {
+		model.addAttribute("title", "Add Products");
+		return "add";
+	}
+	
+	//handler for add
+	@RequestMapping(value="/handle-product", method=RequestMethod.POST)
+	public RedirectView handleProduct(@ModelAttribute Product product, HttpServlet request) {
+		RedirectView redirectView = new RedirectView();
+		redirectView.setUrl(request.getServletContext()+"/");
+		return redirectView;
+	}
+	
+	
+}

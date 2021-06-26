@@ -1,0 +1,5 @@
+package com.web.project.entity;
+
+public class PassengerInfo {
+
+}

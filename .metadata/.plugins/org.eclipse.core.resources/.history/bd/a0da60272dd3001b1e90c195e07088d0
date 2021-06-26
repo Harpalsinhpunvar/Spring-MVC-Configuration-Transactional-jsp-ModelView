@@ -1,0 +1,29 @@
+package com.web.project.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class StudentController {
+	
+	@RequestMapping("/")
+	public String index(Model model) {
+		model.addAttribute("name", "harpalsinh");
+		return "index";
+	}
+	
+	@RequestMapping("/new")
+	public ModelAndView newone() {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("name", "Comcox");
+		modelAndView.addObject("name", "Comcox");
+		modelAndView.setViewName("new");
+		
+		return modelAndView;
+		
+	}
+
+}

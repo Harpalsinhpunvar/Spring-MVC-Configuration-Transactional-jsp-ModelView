@@ -1,0 +1,13 @@
+package com.web.project.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class ContactController {
+	
+	@RequestMapping("/contact")
+	public String showForm() {
+		return "contact";
+	}
+
+}

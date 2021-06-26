@@ -1,0 +1,5 @@
+package com.web.project.dto;
+
+public class FlightBookRequest {
+
+}

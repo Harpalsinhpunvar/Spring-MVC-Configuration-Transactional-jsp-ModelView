@@ -1,0 +1,28 @@
+package com.web.project.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.web.project.dto.FlightBookRequest;
+import com.web.project.dto.FlightBooking;
+import com.web.project.entity.PassengerInfo;
+import com.web.project.repository.PassengerRepository;
+import com.web.project.repository.PaymentRepository;
+
+@Service
+public class FlightBookingService {
+	
+	@Autowired
+	private PassengerRepository passengerRepository;
+	@Autowired
+	private PaymentRepository paymentRepository;
+	
+	public FlightBooking bookFlightTicket(FlightBookRequest request) {
+		FlightBooking booking=null;
+		
+		PassengerInfo passengerInfo = request.getPassengerInfo();
+		passengerInfo = passengerRepository.save(passengerInfo);
+		
+	}
+
+}

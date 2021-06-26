@@ -1,0 +1,52 @@
+package com.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.entities.Todo;
+
+@Component
+public class TodoDao {
+	
+	@Autowired
+	HibernateTemplate hibernateTemplate;
+	
+	@Transactional
+	public int save(Todo t) {
+		Integer i=(Integer) this.hibernateTemplate.save(t);
+		return i;
+	}
+	
+	@Transactional
+	public List<Todo> getAll(){
+		List<Todo> todos = this.hibernateTemplate.loadAll(Todo.class);
+		return todos;
+	}
+	
+	@Transactional
+	public Todo updateTodo(int id, Todo t) {
+		Todo extTodo = this.hibernateTemplate.load(Todo.class, id);
+		
+		extTodo.setTodoTitle(t.getTodoContent());
+		extTodo.setTodoContent(t.getTodoContent());
+	
+		return extTodo;
+		
+	}
+	
+	@Transactional
+	public void deleteById(int id) {
+		Todo todo = this.hibernateTemplate.load(Todo.class, id);
+		this.hibernateTemplate.delete(todo);
+	}
+
+	public Todo getTodo(int id) {
+		Todo todo = this.hibernateTemplate.load(Todo.class, id);
+		return todo;
+	}
+
+}

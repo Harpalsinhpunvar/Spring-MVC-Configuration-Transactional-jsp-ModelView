@@ -1,0 +1,11 @@
+package com.controller;
+
+
+public class MyController {
+	
+	
+	public String hello() {
+		return "index";
+	}
+
+}

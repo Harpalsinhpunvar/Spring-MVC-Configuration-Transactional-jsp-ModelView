@@ -1,0 +1,20 @@
+package com.dao;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.model.Product;
+
+@Component
+public class ProductDao {
+
+	@Autowired
+	private HibernateTemplate hibernateTemplate;
+	
+	@Transactional
+	public void createProduct(Product product) {
+		this.hibernateTemplate.save(product);
+	}
+}
