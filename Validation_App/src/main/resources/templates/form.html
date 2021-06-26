@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Login here</title>
+<link rel="stylesheet" 
+href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+<div class="row mt-5">
+<div class="col-md-6 offset-md-3">
+
+<form th:action="@{/process}" method="post" th:object="${loginData}">
+  <h1 align="center">Register Here</h1>
+  <div class="form-group">
+    
+    <label for="exampleInputEmail1">Username</label>
+   
+    <input 
+    type="text"
+    name="userName" 
+    class="form-control " 
+    th:value="${loginData.userName}"
+    th:classappend="${#fields.hasErrors('userName')?'is-invalid':''}"
+    id="exampleInputEmail1" 
+    aria-describedby="emailHelp" 
+    placeholder="Username">
+    
+    <div th:each="e : ${#fields.errors('userName')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback"></div>
+    
+  </div>
+  
+  <div class="form-group">
+    
+    <label for="exampleInputPassword1">Email</label>
+    
+    <input 
+    type="email" 
+    name="email"
+    class="form-control" 
+    th:value="${loginData.email}"
+    th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
+    id="exampleInputPassword1" 
+    placeholder="Email">
+    
+        <div th:each="e : ${#fields.errors('email')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback"></div>
+  </div>
+  
+  <div class="form-check">
+    <input type="checkbox"
+     class="form-check-input"
+     name = "agreed"
+     th:classappend="${#fields.hasErrors('agreed')?'is-invalid':''}"
+      id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    <div th:each="e : ${#fields.errors('agreed')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback"></div>
+    
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>
